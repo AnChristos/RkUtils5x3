@@ -11,7 +11,7 @@ main()
 
   constexpr double Ax[3] = { 1e-2, 2e-2, 3e-2 };
   double Jac[5] = {};
-  M5x3Vec(Jac, Ax, P);
+  M5x3Vec(Jac, Ax, &P[7]);
   for (int i = 0; i < 5; ++i) {
     std::cout << Jac[i] << '\n';
   }

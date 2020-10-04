@@ -37,7 +37,7 @@ mult5x3Vec_bench(benchmark::State& state)
   for (auto _ : state) {
     const int n = state.range(0);
     for (int i = 0; i < n; ++i) {
-      M5x3Vec(Jac, Ax, P);
+      M5x3Vec(Jac, Ax, &P[7]);
       benchmark::DoNotOptimize(Jac);
       benchmark::ClobberMemory();
     }
