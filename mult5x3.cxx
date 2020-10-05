@@ -1,5 +1,7 @@
 #include "mult5x3.h"
 #include "vec.h"
+#include <Eigen/Core>
+#include <Eigen/Dense>
 ATH_ENABLE_VECTORIZATION;
 
 void
@@ -45,12 +47,12 @@ M5x3Vec(double* __restrict__ Jac,
 
 void
 M5x3Vec1(double* __restrict__ Jac,
-        const double* __restrict__ Ax,
-        const double* __restrict__ P1,
-        const double* __restrict__ P2,
-        const double* __restrict__ P3,
-        const double* __restrict__ P4,
-        const double* __restrict__ P5)
+         const double* __restrict__ Ax,
+         const double* __restrict__ P1,
+         const double* __restrict__ P2,
+         const double* __restrict__ P3,
+         const double* __restrict__ P4,
+         const double* __restrict__ P5)
 {
   using vec2 = CxxUtils::vec<double, 2>;
 
@@ -72,3 +74,16 @@ M5x3Vec1(double* __restrict__ Jac,
   Jac[3] = part4[0] + part4[1] + Ax[2] * P4[2];
   Jac[4] = part5[0] + part5[1] + Ax[2] * P5[2];
 }
+
+void
+M5x3Eigen(double* __restrict__ Jac,
+          const double* __restrict__ Ax,
+          const double* __restrict__ P)
+{
+  Eigen::Map<Eigen::Matrix<double, 5, 1>> JacMap(&Jac[0], 5, 1);
+  Eigen::Map<const Eigen::Matrix<double, 1, 3>> AxMap(&Ax[0], 1, 3);
+  Eigen::Map<const Eigen::Matrix<double, 3, 5>, 0, Eigen::OuterStride<>> Pmap(
+    &P[7], Eigen::OuterStride<>(7));
+  JacMap = AxMap * Pmap;
+}
+
