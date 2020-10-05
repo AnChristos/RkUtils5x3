@@ -26,6 +26,10 @@ to change location
 
 ``mkdir build; cd build``
 
+Using cvmfms Eigen
+``cmake ../RkUtils5x3/  
+ -DEigen3_DIR=/cvmfs/atlas-nightlies.cern.ch/repo/sw/master_Athena_x86_64-centos7-gcc8-opt/sw/lcg/releases/LCG_98python3/eigen/3.3.7/x86_64-centos7-gcc8-opt/share/eigen3/cmake/``
+
 ``cmake ../Mult5x3``
 
 ``make``
