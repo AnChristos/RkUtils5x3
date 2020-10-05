@@ -25,6 +25,12 @@ main()
   for (int i = 0; i < 5; ++i) {
     std::cout << Jac[i] << '\n';
   }
+  std::cout << '\n';
+  M5x3Eigen(Jac, Ax, P);
+  for (int i = 0; i < 5; ++i) {
+    std::cout << Jac[i] << '\n';
+  }
+
 
   return 0;
 }
