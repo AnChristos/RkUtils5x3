@@ -2,6 +2,7 @@
 #include "vec.h"
 #include <Eigen/Core>
 #include <Eigen/Dense>
+
 ATH_ENABLE_VECTORIZATION;
 
 void
@@ -57,16 +58,27 @@ M5x3Vec1(double* __restrict__ Jac,
 {
   using vec2 = CxxUtils::vec<double, 2>;
 
-  vec2 Axv{ Ax[0], Ax[1] };
-  vec2 P1v{ P1[0], P1[1] };
-  vec2 P2v{ P2[0], P2[1] };
-  vec2 P3v{ P3[0], P3[1] };
-  vec2 P4v{ P4[0], P4[1] };
-  vec2 P5v{ P5[0], P5[1] };
+  vec2 Axv{};
+  CxxUtils::vload(Axv,Ax);
+
+  vec2 P1v{};
+  CxxUtils::vload(P1v,P1);
   vec2 part1 = P1v * Axv;
+
+  vec2 P2v{};
+  CxxUtils::vload(P2v,P2);
   vec2 part2 = P2v * Axv;
+
+  vec2 P3v{};
+  CxxUtils::vload(P3v,P3);
   vec2 part3 = P3v * Axv;
+
+  vec2 P4v{};
+  CxxUtils::vload(P4v,P4);
   vec2 part4 = P4v * Axv;
+
+  vec2 P5v{};
+  CxxUtils::vload(P5v,P5);
   vec2 part5 = P5v * Axv;
 
   Jac[0] = part1[0] + part1[1] + Ax[2] * P1[2];
