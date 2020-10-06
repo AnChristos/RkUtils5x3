@@ -21,11 +21,6 @@ main()
     std::cout << Jac[i] << '\n';
   }
   std::cout << '\n';
-  M5x3Vec1(Jac, Ax, &P[7], &P[14], &P[21], &P[28], &P[35]);
-  for (int i = 0; i < 5; ++i) {
-    std::cout << Jac[i] << '\n';
-  }
-  std::cout << '\n';
   M5x3Eigen(Jac, Ax, P);
   for (int i = 0; i < 5; ++i) {
     std::cout << Jac[i] << '\n';

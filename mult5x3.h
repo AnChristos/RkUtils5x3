@@ -22,15 +22,6 @@ M5x3Vec(double* __restrict__ Jac,
         const double* __restrict__ P);
 
 void
-M5x3Vec1(double* __restrict__ Jac,
-         const double* __restrict__ Ax,
-         const double* __restrict__ P1,
-         const double* __restrict__ P2,
-         const double* __restrict__ P3,
-         const double* __restrict__ P4,
-         const double* __restrict__ P5);
-
-void
 M5x3Eigen(double* __restrict__ Jac,
           const double* __restrict__ Ax,
           const double* __restrict__ P);
