@@ -13,18 +13,14 @@ find_package(benchmark REQUIRED)
 find_package (Threads)
 find_package(Eigen3)
 
-add_library(mult5x3lib SHARED
-    mult5x3.cxx
-)
-
-
 add_executable(mult5x3_test 
+	       mult5x3.cxx
 	       mult5x3_test.cxx)
 
-add_executable(mult5x3_bench 
+add_executable(mult5x3_bench
+               mult5x3.cxx	
       	       mult5x3_bench.cxx)
 
-target_link_libraries(mult5x3lib  Eigen3::Eigen)
-target_link_libraries(mult5x3_test  mult5x3lib )
-target_link_libraries(mult5x3_bench  mult5x3lib benchmark::benchmark)
+target_link_libraries(mult5x3_test  Eigen3::Eigen )
+target_link_libraries(mult5x3_bench  benchmark::benchmark Eigen3::Eigen)
 
