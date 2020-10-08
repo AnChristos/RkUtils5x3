@@ -1,5 +1,5 @@
-#ifndef TRANSFORMS_H
-#define TRANSFORMS_H
+#ifndef MULT3X5_H
+#define MULT3X5_H
 #include "vec.h"
 
 inline void
