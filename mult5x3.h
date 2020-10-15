@@ -20,24 +20,21 @@ M5x3Vec(double* __restrict__ Jac,
         const double* __restrict__ P)
 {
   using vec2 = CxxUtils::vec<double, 2>;
-  vec2 V1 = { V[0], V[0] };
-  vec2 V2 = { V[1], V[1] };
-  vec2 V3 = { V[2], V[2] };
-
+  
   // 1st/2nd element
   vec2 P1v1 = { P[0], P[7] };
   vec2 P1v2 = { P[1], P[8] };
   vec2 P1v3 = { P[2], P[9] };
-  vec2 res1 = V1 * P1v1 + V2 * P1v2 + V3 * P1v3;
-
+  vec2 res1 = V[0] * P1v1 + V[1] * P1v2 + V[2] * P1v3;
+  CxxUtils::vstore(&Jac[0], res1);
+  
   // 3th/4th element
   vec2 P2v1 = { P[14], P[21] };
   vec2 P2v2 = { P[15], P[22] };
   vec2 P2v3 = { P[16], P[23] };
-  vec2 res2 = V1 * P2v1 + V2 * P2v2 + V3 * P2v3;
+  vec2 res2 = V[0] * P2v1 + V[1] * P2v2 + V[2] * P2v3;
 
   //store results
-  CxxUtils::vstore(&Jac[0], res1);
   CxxUtils::vstore(&Jac[2], res2);
   // The 5th element
   Jac[4] = V[0] * P[28] + V[1] * P[29] + V[2] * P[30];
