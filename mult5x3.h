@@ -16,24 +16,32 @@ M5x3(double* __restrict__ Jac,
 
 inline void
 M5x3Vec(double* __restrict__ Jac,
-        const double* __restrict__ Ax,
+        const double* __restrict__ V,
         const double* __restrict__ P)
 {
-  using vec4 = CxxUtils::vec<double, 4>;
+  using vec2 = CxxUtils::vec<double, 2>;
+  vec2 V1 = { V[0], V[0] };
+  vec2 V2 = { V[1], V[1] };
+  vec2 V3 = { V[2], V[2] };
 
-  vec4 Axv1{};
-  CxxUtils::vbroadcast(Axv1, Ax[0]);
-  vec4 Axv2{};
-  CxxUtils::vbroadcast(Axv2, Ax[1]);
-  vec4 Axv3{};
-  CxxUtils::vbroadcast(Axv3, Ax[2]);
-  vec4 Pv1 = { P[0] ,P[7], P[14],P[21]};
-  vec4 Pv2 = { P[1] ,P[8], P[15],P[22]};
-  vec4 Pv3 = { P[2], P[9], P[16],P[23]};
-  // The other 4
-  vec4 res = Pv1 * Axv1 + Pv2 * Axv2 + Pv3 * Axv3;
-  CxxUtils::vstore(&Jac[0], res);
-  Jac[4] = Ax[0] * P[28] + Ax[1] * P[29] + Ax[2] * P[30];
+  // 1st/2nd element
+  vec2 P1v1 = { P[0], P[7] };
+  vec2 P1v2 = { P[1], P[8] };
+  vec2 P1v3 = { P[2], P[9] };
+  vec2 res1 = V1 * P1v1 + V2 * P1v2 + V3 * P1v3;
+
+  // 3th/4th element
+  vec2 P2v1 = { P[14], P[21] };
+  vec2 P2v2 = { P[15], P[22] };
+  vec2 P2v3 = { P[16], P[23] };
+  vec2 res2 = V1 * P2v1 + V2 * P2v2 + V3 * P2v3;
+
+  //store results
+  CxxUtils::vstore(&Jac[0], res1);
+  CxxUtils::vstore(&Jac[2], res2);
+  // The 5th element
+  Jac[4] = V[0] * P[28] + V[1] * P[29] + V[2] * P[30];
+
 }
 
 #endif
