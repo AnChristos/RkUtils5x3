@@ -8,15 +8,15 @@ The following script from this repo will install the benchmark under ``${HOME}/.
 
 # Install  RkUtils5x3
 
-``git clone https://github.com/AnChristos/Mult5x3.git``
+``git clone https://github.com/AnChristos/RkUtils5x3.git``
 
 # Build with CMake 
 
 ``mkdir build; cd build``
 
-``cmake ../Mult5x3``
+``cmake ../RkUtils5x3``
 
 ``make``
 
-``./mult5x3_bench --benchmark_report_aggregates_only=true --benchmark_repetitions=20``
+``./RkUtils5x3_bench --benchmark_report_aggregates_only=true --benchmark_repetitions=20``
 
